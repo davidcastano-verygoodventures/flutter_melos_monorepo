@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "FlutterIntegration",
+    name: "flutter_melos_monorepo",
     platforms: [
         .iOS(.v14)
     ],
@@ -30,13 +30,13 @@ let package = Package(
         ),
         .binaryTarget(
             name: "App",
-            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/1.1.2/App.xcframework.zip",
-            checksum: "6622ec7db323c0da93de197008bcceab8393d26d085924e2cc2cc8c5d3eb494e"
+            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/1.1.4/App.xcframework.zip",
+            checksum: "302b2c0baa4c31e0b4eddcb27c20c2ccc55f2875d1efaa9ab75f1e2175549c71"
         ),
         .binaryTarget(
             name: "Flutter",
-            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/1.1.2/Flutter.xcframework.zip",
-            checksum: "18b9579473a742f0f5bf1b39ba65865bdb6cca1efc69ec15fcfe84c9d20de2d1"
+            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/1.1.4/Flutter.xcframework.zip",
+            checksum: "fe7642db29c1bed9b951365a2cc257d4357d500020643f1bd072a4da5ab47c9d"
         )
     ]
 )
