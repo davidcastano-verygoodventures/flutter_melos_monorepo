@@ -26,3 +26,10 @@ build/
 ios/Flutter/Generated.xcconfig
 ios/Flutter/flutter_export_environment.sh
 pubspec.lock
+
+# Xcode related
+**/xcuserdata/
+**/*.xcuserstate
+**/*.xccheckout
+**/*.xcscmblueprint
+**/DerivedData/

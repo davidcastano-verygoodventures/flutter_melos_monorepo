@@ -7,9 +7,8 @@
 
 import SwiftUI
 import Flutter
-import FlutterPluginRegistrant
-// WARNING: You must add the "FlutterIntegration" Package Dependency for this to compile!
 import FlutterIntegration
+import Combine
 
 @main
 struct ios_consumer_appApp: App {

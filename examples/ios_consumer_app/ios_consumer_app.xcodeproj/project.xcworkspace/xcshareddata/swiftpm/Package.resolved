@@ -1,0 +1,15 @@
+{
+  "originHash" : "38b03ce0318dc69ee5fae38cb44f3f15e8b19c41e6ea17041b3d84c06c248d17",
+  "pins" : [
+    {
+      "identity" : "flutter_melos_monorepo",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo.git",
+      "state" : {
+        "revision" : "81cc9b1d752109ed22236bf62a8443d01b649d22",
+        "version" : "1.1.4"
+      }
+    }
+  ],
+  "version" : 3
+}
