@@ -2,6 +2,3 @@
 
  - **FEAT**: Initial commit with Melos monorepo and CI/CD pipelines.
 
-## 1.0.0
-
-- Initial version.
