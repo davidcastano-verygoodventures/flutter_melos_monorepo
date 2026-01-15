@@ -4,6 +4,16 @@ This guide details the complete development lifecycle for this Flutter Monorepo,
 
 ## 1. The Development Cycle
 
+```mermaid
+graph LR
+    A[Developer] -->|git checkout -b| B(Feature Branch)
+    B -->|git commit 'feat: ...'| B
+    B -->|Push & PR| C{Pull Request}
+    C -->|Auto-Run| D[CI Checks: pr_check.yml]
+    D -- Pass --> E[Review Approval]
+    E -->|Squash & Merge| F[Main Branch]
+```
+
 ### Step 1: Create a Feature Branch
 Always work on a separate branch. Do not push directly to `main`.
 ```bash
@@ -45,6 +55,34 @@ Once approved and green, merge the PR into `main`.
 ---
 
 ## 2. The Release Cycle
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant GitHub as GitHub Actions
+    participant Melos
+    participant iOS as Release iOS
+    participant Android as Release Android
+    participant Rel as GitHub Releases
+
+    User->>GitHub: Trigger "Prepare Release"
+    GitHub->>Melos: melos version (Analyze commits)
+    Melos->>GitHub: Push Tag (e.g. v1.2.0)
+    GitHub->>iOS: Trigger release_ios (ref: main)
+    GitHub->>Android: Trigger release_android (ref: main)
+    
+    par Parallel Builds
+        iOS->>iOS: Build XCFrameworks
+        iOS->>iOS: Zip Artifacts
+        iOS->>Rel: Upload Framework Zips
+        
+        Android->>Android: Build AAR Maven Repo
+        Android->>Android: Zip Repo
+        Android->>Rel: Upload Maven Zip
+    end
+    
+    iOS->>GitHub: Update Package.swift
+```
 
 Releases are **manual** but **automated**. You decide *when* to release, the system does the rest.
 
