@@ -11,6 +11,14 @@ let package = Package(
             name: "FlutterIntegration",
             targets: ["FlutterIntegration"]
         ),
+        .library(
+            name: "App",
+            targets: ["App"]
+        ),
+        .library(
+            name: "Flutter",
+            targets: ["Flutter"]
+        ),
     ],
     targets: [
         .target(
@@ -23,12 +31,12 @@ let package = Package(
         .binaryTarget(
             name: "App",
             url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/vcore_utils-v1.1.0/App.xcframework.zip",
-            checksum: "efeeb559b80f885cff98b00a2ffcadf8173c0ccde22c7220fee2754c2c3d18a5"
+            checksum: "2ba2b5b02d2f81b838ffd927f91f90913d1557fa6f3b4563a2b68f2fc53cb144"
         ),
         .binaryTarget(
             name: "Flutter",
             url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/vcore_utils-v1.1.0/Flutter.xcframework.zip",
-            checksum: "8a355828159abbac11a1a363ba45b8da39f1751bbdcf7e94053dfdea59065301"
+            checksum: "6af6e24cd1fdd7e41923d4f6cbf47e14046cc7bad313f663a72053479869d39d"
         )
     ]
 )
