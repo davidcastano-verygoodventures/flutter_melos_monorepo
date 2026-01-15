@@ -31,7 +31,7 @@ void main(List<String> args) async {
 import PackageDescription
 
 let package = Package(
-    name: "FlutterIntegration",
+    name: "flutter_melos_monorepo",
     platforms: [
         .iOS(.v14)
     ],
