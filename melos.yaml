@@ -22,19 +22,13 @@ scripts:
         - test
 
   build:example_ios:
-    exec: flutter build ios --no-codesign
-    packageFilters:
-      scope: example_app
+    run: melos exec --scope=example_app -- flutter build ios --no-codesign
     description: Build iOS for example_app
 
   build:framework:
-    exec: flutter build ios-framework --output=../../build/ios_frameworks --no-profile
-    packageFilters:
-      scope: integration_module
+    run: melos exec --scope=integration_module -- flutter build ios-framework --output=../../build/ios_frameworks --no-profile
     description: Build XCFrameworks from integration_module
 
   build:aar:
-    exec: flutter build aar --no-profile --no-debug
-    packageFilters:
-      scope: integration_module
+    run: melos exec --scope=integration_module -- flutter build aar --no-profile --no-debug
     description: Build Android AAR from integration_module
