@@ -1,0 +1,50 @@
+name: Prepare Release
+
+on:
+    workflow_dispatch:
+        inputs:
+            version_type:
+                description: "Version bump type (major, minor, patch, or leave empty for auto)"
+                required: false
+                default: ""
+                type: choice
+                options:
+                    - ""
+                    - patch
+                    - minor
+                    - major
+
+jobs:
+    version_and_tag:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: 0 # Important: Fetch all history for conventional commits to work
+
+            - name: Setup Dart
+              uses: dart-lang/setup-dart@v1
+
+            - name: Install Melos
+              run: dart pub global activate melos
+
+            - name: Configure Git Identity
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+            - name: Version with Melos
+              run: |
+                  if [ -z "${{ inputs.version_type }}" ]; then
+                    melos version --yes
+                  else
+                    melos version --yes --manual-version=${{ inputs.version_type }}
+                  fi
+
+            - name: Push Changes
+              run: git push origin HEAD:main --follow-tags

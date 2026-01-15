@@ -1,0 +1,10 @@
+name: flutter_melos_monorepo
+description: A new Flutter monorepo project.
+publish_to: "none"
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dev_dependencies:
+  melos: ^2.9.0
+dependencies:
+  crypto: ^3.0.3

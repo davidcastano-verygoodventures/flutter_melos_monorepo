@@ -1,0 +1,39 @@
+name: flutter_melos_monorepo
+
+packages:
+  - apps/*
+  - packages/*
+
+scripts:
+  postbootstrap: dart pub get
+
+  analyze:
+    exec: flutter analyze .
+    description: Analyze all packages
+
+  format:
+    exec: dart format .
+    description: Format all packages
+
+  test:
+    exec: flutter test
+    select-package-dir-exists:
+      - test
+
+  build:example_ios:
+    exec: flutter build ios --no-codesign
+    select-package:
+      scope: example_app
+    description: Build iOS for example_app
+
+  build:framework:
+    exec: flutter build ios-framework --output=../../build/ios_frameworks --no-profile
+    select-package:
+      scope: integration_module
+    description: Build XCFrameworks from integration_module
+
+  build:aar:
+    exec: flutter build aar --no-profile --no-debug
+    select-package:
+      scope: integration_module
+    description: Build Android AAR from integration_module
