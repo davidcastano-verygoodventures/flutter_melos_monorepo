@@ -1,66 +1,67 @@
 name: Release iOS XCFrameworks
 
 on:
-    push:
-        tags:
-            - "v*"
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
 
 jobs:
-    build_and_release:
-        runs-on: macos-latest
-        permissions:
-            contents: write # Needed for creating releases and committing changes
+  build_and_release:
+    runs-on: macos-latest
+    permissions:
+      contents: write # Needed for creating releases and committing changes
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Setup Flutter
-              uses: subosito/flutter-action@v2
-              with:
-                  channel: "stable"
-                  cache: true
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
 
-            - name: Install Melos
-              run: dart pub global activate melos
+      - name: Install Melos
+        run: dart pub global activate melos
 
-            - name: Bootstrap
-              run: melos bootstrap
+      - name: Bootstrap
+        run: melos bootstrap
 
-            - name: Build Frameworks
-              run: melos run build:framework
+      - name: Build Frameworks
+        run: melos run build:framework
 
-            - name: Zip Artifacts
-              run: |
-                  cd build/ios_frameworks
-                  zip -r App.xcframework.zip App.xcframework
-                  zip -r Flutter.xcframework.zip Flutter.xcframework
-                  cd ../..
+      - name: Zip Artifacts
+        run: |
+          cd build/ios_frameworks
+          zip -r App.xcframework.zip App.xcframework
+          zip -r Flutter.xcframework.zip Flutter.xcframework
+          cd ../..
 
-            - name: Update Package.swift
-              run: |
-                  repo_url="https://github.com/${{ github.repository }}"
-                  version="${{ github.ref_name }}"
-                  dart scripts/update_package_manifest.dart $version $repo_url
+      - name: Update Package.swift
+        run: |
+          repo_url="https://github.com/${{ github.repository }}"
+          version="${{ github.ref_name }}"
+          dart scripts/update_package_manifest.dart $version $repo_url
 
-            - name: Commit Package.swift
-              run: |
-                  git config user.name "GitHub Action"
-                  git config user.email "action@github.com"
-                  git add Package.swift
-                  git commit -m "Update Package.swift for $version"
-                  # Push back to the default branch (usually main or master)
-                  # Note: We need to be careful not to trigger infinite loops, but tag triggers don't usually prevent pushing to branches.
-                  # We might need to fetch the branch name dynamically.
-                  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-                  git push origin HEAD:main
+      - name: Commit Package.swift
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add Package.swift
+          git commit -m "Update Package.swift for $version"
+          # Push back to the default branch (usually main or master)
+          # Note: We need to be careful not to trigger infinite loops, but tag triggers don't usually prevent pushing to branches.
+          # We might need to fetch the branch name dynamically.
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git push origin HEAD:main
 
-            - name: Create Release
-              uses: softprops/action-gh-release@v1
-              with:
-                  files: |
-                      build/ios_frameworks/App.xcframework.zip
-                      build/ios_frameworks/Flutter.xcframework.zip
-                      Package.swift
-                  draft: false
-                  prerelease: false
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/ios_frameworks/App.xcframework.zip
+            build/ios_frameworks/Flutter.xcframework.zip
+            Package.swift
+          draft: false
+          prerelease: false
