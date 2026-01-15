@@ -56,5 +56,5 @@ jobs:
         run: |
           TAG=$(git describe --tags --abbrev=0)
           echo "Triggering releases for tag $TAG"
-          gh workflow run release_ios.yml --ref $TAG
-          gh workflow run release_android.yml --ref $TAG
+          gh workflow run release_ios.yml --ref main -f tag_name=$TAG
+          gh workflow run release_android.yml --ref main -f tag_name=$TAG
