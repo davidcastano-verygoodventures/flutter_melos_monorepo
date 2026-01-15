@@ -72,7 +72,7 @@ sequenceDiagram
     GitHub->>Android: Trigger release_android (ref: main)
     
     par Parallel Builds
-        iOS->>iOS: Build XCFrameworks
+        iOS->>iOS: Build XCFrameworks (App, Flutter, Plugins)
         iOS->>iOS: Zip Artifacts
         iOS->>Rel: Upload Framework Zips
         
@@ -81,7 +81,8 @@ sequenceDiagram
         Android->>Rel: Upload Maven Zip
     end
     
-    iOS->>GitHub: Update Package.swift
+    iOS->>GitHub: Push to main (Update Package.swift)
+    iOS->>Rel: Finalize Release
 ```
 
 Releases are **manual** but **automated**. You decide *when* to release, the system does the rest.
@@ -98,14 +99,31 @@ The system performs the following sequence automatically:
 1.  **Versioning**: `melos version` analyzes your PR commits on `main`.
     *   If you merged a `feat:`, it bumps the version.
     *   It updates `pubspec.yaml` and `CHANGELOG.md`.
-    *   It creates a Git Tag (e.g., `v1.2.0`).
+    *   It creates a Git Tag (e.g., `1.2.0`).
 2.  **Building**: Two parallel jobs start:
-    *   **iOS**: Builds `App.xcframework` and `Flutter.xcframework`.
+    *   **iOS**: Builds `App.xcframework`, `Flutter.xcframework`, and `FlutterPluginRegistrant.xcframework`. 
     *   **Android**: Builds the Maven Repository (`.aar` files).
 3.  **Publishing**:
     *   All artifacts are uploaded to the **Releases** page on GitHub.
-    *   `Package.swift` is updated with the new checksums.
+    *   **Manifest Sync**: `Package.swift` is updated with the new checksums and **pushed back to the `main` branch**.
 
 ### Step 3: Consumption
-*   **iOS**: The `Package.swift` in the root is now pointing to the new binary release.
+*   **iOS (SPM)**: 
+    *   Connect to: `https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo`
+    *   Rule: **Branch: main** (Recommended) or **Tag: X.Y.Z**.
+    *   **Important**: You must import `FlutterPluginRegistrant` in your Swift code to register plugins.
 *   **Android**: Download the `android_maven_repo.zip` from the Releases page and unzip it into your native Android project's repository.
+
+---
+
+## 3. Maintenance & Troubleshooting
+
+### SPM Checksum Mismatches
+If Xcode complains about a checksum mismatch:
+1.  Ensure you are on the **Branch: main** rule.
+2.  Go to **File > Packages > Reset Package Caches**.
+
+### Missing Plugins
+If a plugin doesn't work in the native app:
+1.  Check if `import FlutterPluginRegistrant` is at the top of your Swift file.
+2.  Ensure you call `GeneratedPluginRegistrant.register(with: flutterEngine)` in your init code.

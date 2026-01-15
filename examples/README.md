@@ -17,18 +17,26 @@ A minimal Swift package that consumes the released XCFrameworks via Swift Packag
     If successful, it will print: `Successfully imported FlutterIntegration!`
 
 ### Visual Verification (Simulator)
-Since I cannot generate an `.xcodeproj` file directly, act as the "Human Generator":
 1.  **Open Xcode** -> **Create a new Xcode Project** -> **App**.
 2.  Name it: `VisualConsumer`.
 3.  **Add Package Dependency**:
     *   File -> Add Packages...
-    *   URL: Local path to this repo (`/Users/davidcastano/experiments/flutter_melos_monorepo`) OR your GitHub URL.
-    *   Select `FlutterIntegration` library.
+    *   URL: `https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo`
+    *   Dependency Rule: **Branch: main** (recommended) or **Tag: 1.1.6**.
+    *   Select **FlutterIntegration**, **App**, **Flutter**, and **FlutterPluginRegistrant**.
 4.  **Copy Code**:
-    *   Open `examples/ios_consumer/VisualVerification.swift`.
-    *   Copy the code.
-    *   Paste it into your project's `VisualConsumerApp.swift` (replacing everything).
-5.  **Run**: Click Play. You will see a button to "Launch Flutter Module".
+    *   Use the code found in `examples/ios_consumer_app/ios_consumer_app/ios_consumer_appApp.swift`.
+5.  **Run**: Click Play.
+
+---
+
+## Maintenance: Cleaning up Git State
+If you see local files tracking that shouldn't be (like `xcuserstate`), run:
+```bash
+git rm -r --cached .
+git add .
+git commit -m "chore: refresh git index"
+```
 
 ## 2. Android Consumer
 A minimal Android project that consumes the released AARs via a local Maven repository.

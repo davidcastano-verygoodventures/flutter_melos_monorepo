@@ -1,11 +1,11 @@
 # integration_module
 
-A new Flutter module project.
+This is the core Flutter module of the monorepo. It serves as the primary entry point for native integration.
 
-## Getting Started
+## Purpose
+- Orchestrates dependencies between `ui_kit` and `core_utils`.
+- Compiled into AARs (Android) and XCFrameworks (iOS) during the automated release process.
+- Direct consumer of all internal packages.
 
-For help getting started with Flutter development, view the online
-[documentation](https://flutter.dev/).
-
-For instructions integrating Flutter modules to your existing applications,
-see the [add-to-app documentation](https://flutter.dev/docs/development/add-to-app).
+## Integration
+For technical instructions on how to embed this module into your native apps, see the [Integration Guide](../../.gemini/antigravity/brain/eafb390f-2b1f-4fd2-9319-5823405ea1f1/integration_guide.md).
