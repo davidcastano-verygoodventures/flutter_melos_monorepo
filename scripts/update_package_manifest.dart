@@ -13,8 +13,8 @@ void main(List<String> args) async {
 
   final version = args[0];
   // Ensure version doesn't have 'v' prefix for the package version, but keeping it for URL might be needed depending on tag
-  final versionString = version.startsWith('v') ? version.substring(1) : version;
-  final tag = version.startsWith('v') ? version : 'v$version';
+  final versionString = version;
+  final tag = version;
   
   final repoUrl = args[1]; // e.g. https://github.com/user/repo (ensure no trailing slash)
   
