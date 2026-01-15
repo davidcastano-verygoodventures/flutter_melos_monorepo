@@ -55,3 +55,7 @@ A minimal Android project that consumes the released AARs via a local Maven repo
     ./gradlew build
     ```
     If the build succeeds, the AAR integration is working.
+
+---
+
+For a deeper dive into how this integration works and how to set up a **Hosted Maven Repository** (the better alternative), check out the [Android Integration Guide](../docs/android_integration.md).
