@@ -43,6 +43,9 @@ jobs:
           cd build/ios_frameworks/Release
           zip -r ../App.xcframework.zip App.xcframework
           zip -r ../Flutter.xcframework.zip Flutter.xcframework
+          if [ -d "FlutterPluginRegistrant.xcframework" ]; then
+            zip -r ../FlutterPluginRegistrant.xcframework.zip FlutterPluginRegistrant.xcframework
+          fi
 
       - name: Update Package.swift
         run: |
@@ -57,8 +60,6 @@ jobs:
           git add Package.swift
           git commit -m "Update Package.swift for $version"
           # Push back to the default branch (usually main or master)
-          # Note: We need to be careful not to trigger infinite loops, but tag triggers don't usually prevent pushing to branches.
-          # We might need to fetch the branch name dynamically.
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push origin HEAD:main
 
@@ -69,6 +70,7 @@ jobs:
           files: |
             build/ios_frameworks/App.xcframework.zip
             build/ios_frameworks/Flutter.xcframework.zip
+            build/ios_frameworks/FlutterPluginRegistrant.xcframework.zip
             Package.swift
           draft: false
           prerelease: false
