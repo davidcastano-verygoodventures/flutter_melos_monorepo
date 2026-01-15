@@ -47,8 +47,8 @@ jobs:
       - name: Update Package.swift
         run: |
           repo_url="https://github.com/${{ github.repository }}"
-          version="${{ inputs.tag_name }}"
-          dart scripts/update_package_manifest.dart $version $repo_url
+          version="${{ inputs.tag_name || github.ref_name }}"
+          dart scripts/update_package_manifest.dart "$version" "$repo_url"
 
       - name: Commit Package.swift
         run: |
@@ -65,7 +65,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ inputs.tag_name }}
+          tag_name: ${{ inputs.tag_name || github.ref_name }}
           files: |
             build/ios_frameworks/App.xcframework.zip
             build/ios_frameworks/Flutter.xcframework.zip
