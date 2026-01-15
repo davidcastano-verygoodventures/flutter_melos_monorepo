@@ -17,23 +17,24 @@ scripts:
 
   test:
     exec: flutter test
-    select-package-dir-exists:
-      - test
+    packageFilters:
+      dirExists:
+        - test
 
   build:example_ios:
     exec: flutter build ios --no-codesign
-    select-package:
+    packageFilters:
       scope: example_app
     description: Build iOS for example_app
 
   build:framework:
     exec: flutter build ios-framework --output=../../build/ios_frameworks --no-profile
-    select-package:
+    packageFilters:
       scope: integration_module
     description: Build XCFrameworks from integration_module
 
   build:aar:
     exec: flutter build aar --no-profile --no-debug
-    select-package:
+    packageFilters:
       scope: integration_module
     description: Build Android AAR from integration_module
