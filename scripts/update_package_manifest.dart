@@ -40,6 +40,14 @@ let package = Package(
             name: "FlutterIntegration",
             targets: ["FlutterIntegration"]
         ),
+        .library(
+            name: "App",
+            targets: ["App"]
+        ),
+        .library(
+            name: "Flutter",
+            targets: ["Flutter"]
+        ),
     ],
     targets: [
         .target(
