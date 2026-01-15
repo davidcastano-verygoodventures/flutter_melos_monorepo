@@ -22,13 +22,13 @@ let package = Package(
         ),
         .binaryTarget(
             name: "App",
-            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/vmain/App.xcframework.zip",
-            checksum: "1b568d67a20f83597cc3f8ba639621c6e694986cc0a5d1c0c66442bf8c1edc1c"
+            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/vcore_utils-v1.1.0/App.xcframework.zip",
+            checksum: "efeeb559b80f885cff98b00a2ffcadf8173c0ccde22c7220fee2754c2c3d18a5"
         ),
         .binaryTarget(
             name: "Flutter",
-            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/vmain/Flutter.xcframework.zip",
-            checksum: "181003d705d34743d2c16a33a99d6abc611316b776a1aa36dfd4070966c0b95b"
+            url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/vcore_utils-v1.1.0/Flutter.xcframework.zip",
+            checksum: "8a355828159abbac11a1a363ba45b8da39f1751bbdcf7e94053dfdea59065301"
         )
     ]
 )
