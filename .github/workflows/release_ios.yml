@@ -39,10 +39,9 @@ jobs:
 
       - name: Zip Artifacts
         run: |
-          cd build/ios_frameworks
-          zip -r App.xcframework.zip App.xcframework
-          zip -r Flutter.xcframework.zip Flutter.xcframework
-          cd ../..
+          cd build/ios_frameworks/Release
+          zip -r ../App.xcframework.zip App.xcframework
+          zip -r ../Flutter.xcframework.zip Flutter.xcframework
 
       - name: Update Package.swift
         run: |
