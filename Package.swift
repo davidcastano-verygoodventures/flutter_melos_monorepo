@@ -31,12 +31,12 @@ let package = Package(
         .binaryTarget(
             name: "App",
             url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/1.1.2/App.xcframework.zip",
-            checksum: "f12d965da160592690daf4888bdd3ae6e47d6a0f0fc0775d549b914362d7486b"
+            checksum: "6622ec7db323c0da93de197008bcceab8393d26d085924e2cc2cc8c5d3eb494e"
         ),
         .binaryTarget(
             name: "Flutter",
             url: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/download/1.1.2/Flutter.xcframework.zip",
-            checksum: "67aec76608a1a74addfff8cfed1e6cb6411601b4abe3aebb931bf7e3a9745ef3"
+            checksum: "18b9579473a742f0f5bf1b39ba65865bdb6cca1efc69ec15fcfe84c9d20de2d1"
         )
     ]
 )
