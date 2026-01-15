@@ -1,3 +1,6 @@
+## 0.0.3
+- Integrated into the automated Melos release pipeline.
+
 ## 0.0.2
 
  - **FEAT**: Initial commit with Melos monorepo and CI/CD pipelines.

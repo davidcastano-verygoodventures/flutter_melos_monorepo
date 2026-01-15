@@ -3,11 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 2026-01-15
+## 1.1.6 (2026-01-15)
 
-### Changes
+### Major Improvements
+- **SPM Plugin Support**: Added automated generation and zipping of `FlutterPluginRegistrant.xcframework`.
+- **Manifest Synchronization**: Improved release workflow to push `Package.swift` updates directly to `main` with rebase safety.
+- **Flexible Tagging**: Full support for both `vX.Y.Z` and `X.Y.Z` semantic version tags.
 
----
+### Bug Fixes
+- **Checksum Resolution**: Fixed a race condition where SPM manifests were outdated relative to build artifacts.
+- **CI Reliability**: Added `git pull --rebase` to release workflows to prevent push failures during concurrent changes.
+
+## 1.1.0 (2026-01-15)
 
 Packages with breaking changes:
 
