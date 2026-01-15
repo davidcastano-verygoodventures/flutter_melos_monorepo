@@ -21,12 +21,6 @@ scripts:
       dirExists:
         - test
 
-  build:example_ios:
-    run: |
-      cd apps/example_app
-      flutter build ios --no-codesign
-    description: Build iOS for example_app
-
   build:framework:
     run: |
       cd apps/integration_module
