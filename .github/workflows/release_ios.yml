@@ -46,7 +46,7 @@ jobs:
       - name: Update Package.swift
         run: |
           repo_url="https://github.com/${{ github.repository }}"
-          version="${{ github.ref_name }}"
+          version="${{ inputs.tag_name }}"
           dart scripts/update_package_manifest.dart $version $repo_url
 
       - name: Commit Package.swift
