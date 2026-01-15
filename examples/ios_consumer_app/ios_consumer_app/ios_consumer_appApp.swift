@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Flutter
+import FlutterPluginRegistrant
 import FlutterIntegration
 import Combine
 

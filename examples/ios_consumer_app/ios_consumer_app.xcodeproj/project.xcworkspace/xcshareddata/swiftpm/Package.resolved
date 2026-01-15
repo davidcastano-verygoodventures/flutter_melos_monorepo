@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo.git",
       "state" : {
-        "revision" : "81cc9b1d752109ed22236bf62a8443d01b649d22",
-        "version" : "1.1.4"
+        "branch" : "main",
+        "revision" : "cfdb22e1e5313014f3e0e5fa76fa727a9f164322"
       }
     }
   ],

@@ -353,8 +353,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.2;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
