@@ -1,0 +1,11 @@
+# Build artifacts
+.gradle/
+build/
+
+# Local configuration
+local.properties
+
+# Downloaded binaries
+libs/
+*.zip
+*.jar

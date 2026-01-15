@@ -10,6 +10,15 @@ if [ -z "$TAG" ]; then
     exit 1
 fi
 
+if ! command -v gh &> /dev/null; then
+    echo "Error: GitHub CLI (gh) is not installed."
+    exit 1
+fi
+
+echo "Cleaning up old artifacts..."
+rm -rf libs
+rm -f android_maven_repo.zip
+
 echo "Downloading artifacts for $TAG..."
 gh release download $TAG -p "android_maven_repo.zip" --clobber
 
@@ -17,4 +26,4 @@ echo "Unzipping Maven Repo..."
 mkdir -p libs
 unzip -o android_maven_repo.zip -d libs
 
-echo "Done! You can now run './gradlew build'"
+echo "Done! If you have Java installed, you can now run './gradlew build'"

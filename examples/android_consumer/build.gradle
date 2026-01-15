@@ -16,16 +16,9 @@ android {
     }
 }
 
-repositories {
-    google()
-    mavenCentral()
-    maven {
-        // Point to the unzipped local repo
-        url uri("./libs/repo")
-    }
-}
+// Repositories are now managed in settings.gradle
 
 dependencies {
     // This dependency comes from the local maven repo we downloaded
-    implementation 'com.example.integration_module:flutter_release:1.1.0'
+    implementation 'com.example.integration_module:flutter_release:1.0'
 }
