@@ -58,9 +58,10 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           git add Package.swift
-          git commit -m "Update Package.swift for $version"
+          git commit -m "Update Package.swift for $version" || echo "No changes to commit"
           # Push back to the default branch (usually main or master)
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull origin main --rebase
           git push origin HEAD:main
 
       - name: Create Release
