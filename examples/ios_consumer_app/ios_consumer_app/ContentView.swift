@@ -1,49 +1,37 @@
+//
+//  ContentView.swift
+//  ios_consumer_app
+//
+//  Created by David Castaño on 15/01/26.
+//
+
 import SwiftUI
 import Flutter
-import FlutterPluginRegistrant
-
-// 1. The Flutter Dependency
-// Ensure you have added the "FlutterIntegration" Package Dependency in Xcode.
-import FlutterIntegration
-
-@main
-struct IOSConsumerApp: App {
-    // Create the FlutterEngine
-    @StateObject var flutterDependencies = FlutterDependencies()
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(flutterDependencies)
-        }
-    }
-}
-
-class FlutterDependencies: ObservableObject {
-    let flutterEngine = FlutterEngine(name: "my flutter engine")
-
-    init() {
-        // Run the engine
-        flutterEngine.run()
-        // Connect plugins
-        GeneratedPluginRegistrant.register(with: flutterEngine)
-    }
-}
 
 struct ContentView: View {
     @EnvironmentObject var flutterDependencies: FlutterDependencies
 
     var body: some View {
         VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
             Text("Native iOS View")
-                .padding()
+                .font(.headline)
+            
+            Spacer().frame(height: 20)
             
             Button("Launch Flutter Module") {
                 showFlutter()
             }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
         }
+        .padding()
     }
-
+    
     func showFlutter() {
         // Get the Root View Controller
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -61,4 +49,8 @@ struct ContentView: View {
         // Present it
         rootViewController.present(flutterViewController, animated: true, completion: nil)
     }
+}
+
+#Preview {
+    ContentView()
 }
