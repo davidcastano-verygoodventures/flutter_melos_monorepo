@@ -31,3 +31,39 @@ dependencies {
     // This dependency comes from the local maven repo we downloaded
     implementation 'com.example.integration_module:flutter_release:1.0'
 }
+
+tasks.register('downloadFlutterArtifacts') {
+    doLast {
+        def libDir = layout.projectDirectory.dir("libs")
+        def repoDir = libDir.dir("repo")
+        if (!repoDir.asFile.exists()) {
+            println "Flutter artifacts not found in libs/repo. Downloading..."
+            
+            // Allow overriding the URL via property, or default to latest release
+            def repoUrl = findProperty("FLUTTER_REPO_URL") ?: "https://github.com/davidcastano-verygoodventures/flutter_melos_monorepo/releases/latest/download/android_maven_repo.zip"
+            def zipFile = libDir.file("android_maven_repo.zip").asFile
+            
+            libDir.asFile.mkdirs()
+            
+            println "Downloading from $repoUrl"
+            new URL(repoUrl).withInputStream { i ->
+                zipFile.withOutputStream { o ->
+                    o << i
+                }
+            }
+            
+            println "Unzipping artifacts..."
+            copy {
+                from zipTree(zipFile)
+                into libDir
+            }
+            
+            zipFile.delete()
+            println "Download complete."
+        } else {
+            println "Flutter artifacts found."
+        }
+    }
+}
+
+preBuild.dependsOn downloadFlutterArtifacts
